@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-install and deploy</actionName>
+            <displayName>install and deploy</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>wildfly:deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-install and redeploy</actionName>
+            <displayName>install and redeploy</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>wildfly:redeploy</goal>
+            </goals>
+        </action>
+    </actions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:cxj="http://cxj.com/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ds="http://deltaspike.apache.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>CodeMirror</title>
+    </h:head>
+    <h:body>
+        <ds:windowId/>
+        <h:form>
+            <p:selectOneButton value="#{codeMirrorBean.mode}">
+                <p:ajax update="cm1"/>
+                <f:selectItems value="#{codeMirrorBean.modes}" var="mode" itemLabel="#{mode}" itemValue="#{mode}"/>
+            </p:selectOneButton>
+            <cxj:codeMirror id="cm1" value="#{codeMirrorBean.script}" mode="#{codeMirrorBean.mode}">
+                <cxj:cmTags/>
+                <cxj:cmBrackets/>
+                <cxj:cmFoldCode/>
+            </cxj:codeMirror>
+            <cxj:codeMirror id="cm2" value="#{codeMirrorBean.script}" mode="xml">
+                <cxj:cmBrackets/>
+                <cxj:cmFoldCode/>
+            </cxj:codeMirror>
+            <h:panelGrid>
+                <p:spacer/>
+                <p:commandButton value="update cm1" process="@form" update="cm1"/>
+                <p:commandButton value="update cm2" process="@form" update="cm2"/>
+                <p:commandLink value="back" action="#{codeMirrorBean.toWelecome()}"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

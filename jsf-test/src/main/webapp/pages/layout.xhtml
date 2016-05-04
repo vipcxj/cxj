@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:cxj="http://cxj.com/jsf"
+      xmlns:ds="http://deltaspike.apache.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Layout</title>
+    </h:head>
+    <h:body>
+        <ds:windowId/>
+        <cxj:layout id="root" options="{
+                    west__closable: false
+                    }">
+            <h:form id ="fmCenter">
+                <cxj:layoutPane id="pCenter" options="{
+                                north__resizable: false
+                                }">
+                    <cxj:layoutPane position="center">
+                        innerContent
+                    </cxj:layoutPane>
+                    <cxj:layoutPane position="north">
+                        north
+                    </cxj:layoutPane>
+                </cxj:layoutPane>
+            </h:form>
+            <h:form id="fmWest">
+                <cxj:layoutPane id="pWest" position="west"/>
+            </h:form>
+            <h:form id="fmEast">
+                <cxj:layoutPane id="pEast" position="east"/>
+            </h:form>
+            <h:form id="fmNorth">
+                <cxj:layoutPane id="pNorth" position="north"/>
+            </h:form>
+            <h:form id="fmSouth">
+                <cxj:layoutPane id="pSouth" position="south">
+                    <p:commandLink value="back" style="float: left" action="#{layoutBean.toWelecome()}"/>
+                    <p:commandButton value="refresh west" update=":root:fmWest"/>
+                    <p:commandButton value="refresh east" update=":root:fmEast"/>
+                    <p:commandButton value="refresh north" update=":root:fmNorth"/>
+                    <p:commandButton value="refresh south" update=":root:fmSouth"/>
+                    <p:commandButton value="refresh center" style="clear: both" update=":root:fmCenter"/>
+                </cxj:layoutPane>
+            </h:form>
+        </cxj:layout>
+    </h:body>
+</html>

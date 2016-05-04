@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ds="http://deltaspike.apache.org/jsf"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:cxj="http://cxj.com/jsf">
+    <h:head>
+        <title>DataTable</title>
+    </h:head>
+    <h:body>
+        <ds:windowId/>
+        <o:form>
+            <p:dataTable value="#{dataTableBean.dataList}" var="item" editable="true" selection="#{dataTableBean.selection}" selectionMode="single" rowKey="#{item.name}">
+                <f:facet name="header">
+                    这是一个测试datatable
+                </f:facet>
+                <f:facet name="footer">
+                    <cxj:tableMenu>
+                        <p:ajax event="insertInit" listener="#{dataTableBean.onInserterInit}"/>
+                        <p:ajax event="insertInvoke" listener="#{dataTableBean.onInserterInvoke}"/>
+                        <p:ajax event="insertCancel" listener="#{dataTableBean.onInserterCancel}"/>
+                        <p:ajax event="delete" listener="#{dataTableBean.onDeleterInvoke}"/>
+                        <cxj:tableInserter title="添加"/>
+                        <cxj:tableDeleter title="删除"/>
+                    </cxj:tableMenu>
+                </f:facet>
+                <p:column headerText="姓名">
+                    <p:cellEditor>
+                        <f:facet name="input">
+                            <p:inputText style="width: 100%" value="#{item.name}" required="true"/>
+                        </f:facet>
+                        <f:facet name="output">
+                            #{item.name}
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="年龄">
+                    <p:cellEditor>
+                        <f:facet name="input">
+                            <p:inputText style="width: 100%" value="#{item.age}">
+                                <f:validateLongRange minimum="0"/>
+                            </p:inputText>
+                        </f:facet>
+                        <f:facet name="output">
+                            #{item.age}
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="职业">
+                    <p:cellEditor>
+                        <f:facet name="input">
+                            <p:inputText style="width: 100%" value="#{item.position}"/>
+                        </f:facet>
+                        <f:facet name="output">
+                            #{item.position}
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column>
+                    <p:rowEditor/>
+                </p:column>
+            </p:dataTable>
+            <p:commandLink value="back" action="#{dataTableBean.toWelecome()}"/>
+        </o:form> 
+    </h:body>
+</html>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    xmlns:p="http://primefaces.org/ui" 
+    xmlns:o="http://omnifaces.org/ui" 
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <c:set var="dialogContent" value="#{not empty dialogContent ? dialogContent : dialog}"/>
+    
+    <o:moveComponent for="#{tirgger}" destination="BEHAVIOR">
+        <p:ajax event="click" process="@this" update="#{dialogContent}" oncomplete="#{p:widgetVar(dialog)}.show()"/>
+    </o:moveComponent>
+
+    <o:moveComponent for="#{confirm}" destination="BEHAVIOR" rendered="#{not empty confirm}">
+        <p:ajax event="click" oncomplete="if(!args.validationFailed) #{p:widgetVar(dialog)}.hide()"/>
+    </o:moveComponent>
+    
+</ui:composition>
+
