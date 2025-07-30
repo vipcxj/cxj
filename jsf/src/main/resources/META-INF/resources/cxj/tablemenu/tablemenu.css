@@ -1,0 +1,7 @@
+.ui-table-menu span, 
+.ui-row-inserter span {
+    cursor:pointer;
+    float:left;
+}
+
+

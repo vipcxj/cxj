@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui" 
+    xmlns:o="http://omnifaces.org/ui" 
+    xmlns:of="http://omnifaces.org/functions" 
+    xmlns:cxj="http://cxj.com/jsf" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <cxj:autoId/>
+    <c:set var="type" value="#{not empty type ? type : 'text'}"/>
+    <c:set var="process" value="#{not empty process ? process : '@form'}"/>
+    <c:set var="update" value="#{not empty update ? update : '@form'}"/>
+    <c:set var="required" value="#{required ? required : 'false'}"/>
+    <c:choose>
+        <c:when test="#{type eq 'separator' or type eq 'empty'}">
+            <p:column/>
+        </c:when>
+        <c:otherwise>
+            <p:outputLabel for="#{id}" value="#{label}&#160; "/>
+        </c:otherwise>
+    </c:choose>
+    <c:choose>
+        <c:when test="#{type eq 'text'}">
+            <p:inputText id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                <p:ajax event="blur" update="#{id}-message" />
+            </p:inputText>
+            <p:message id="#{id}-message" for="#{id}" />
+        </c:when>
+        <c:when test="#{type eq 'password'}">
+            <p:password id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                <p:ajax event="blur" update="#{id}-message" />
+            </p:password>
+            <h:message id="#{id}-message" for="#{id}" />
+        </c:when>
+        <c:when test="#{type eq 'boolean'}">
+            <p:selectBooleanCheckbox id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                <p:ajax event="blur" update="#{id}-message" />
+            </p:selectBooleanCheckbox>
+            <h:message id="#{id}-message" for="#{id}" />
+        </c:when>
+        <c:when test="#{type eq 'select'}">
+            <c:choose>
+                <c:when test="#{cxj:isMap(options)}">
+                    <p:selectOneMenu id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                        <f:selectItems value="#{options.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+                        <p:ajax event="change" update="#{id}-message" />
+                    </p:selectOneMenu>
+                </c:when>
+                <c:when test="#{cxj:isCollection(options)}">
+                    <p:selectOneMenu id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                        <f:selectItems value="#{options}" var="entry" itemValue="#{entry}" itemLabel="#{entry}" />
+                        <p:ajax event="change" update="#{id}-message" />
+                    </p:selectOneMenu>
+                </c:when>
+                <c:otherwise>
+                    <p:outputLabel value="options的类型错误，必须是map或者collection！"/>
+                </c:otherwise>
+            </c:choose>
+            <h:message id="#{id}-message" for="#{id}" />
+        </c:when>
+        <c:when test="#{type eq 'muti-select'}">
+            <c:choose>
+                <c:when test="#{cxj:isMap(options)}">
+                    <p:selectCheckboxMenu id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                        <f:selectItems value="#{options.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+                        <p:ajax event="change" update="#{id}-message" />
+                    </p:selectCheckboxMenu>
+                </c:when>
+                <c:when test="#{cxj:isCollection(options)}">
+                    <p:selectCheckboxMenu id="#{id}" value="#{property}" label="#{label}" required="#{required}">
+                        <f:selectItems value="#{options}" var="entry" itemValue="#{entry}" itemLabel="#{entry}" />
+                        <p:ajax event="change" update="#{id}-message" />
+                    </p:selectCheckboxMenu>
+                </c:when>
+                <c:otherwise>
+                    <h:outputText value="options的类型错误，必须是map或者collection！"/>
+                </c:otherwise>
+            </c:choose>
+            <h:message id="#{id}-message" for="#{id}" />
+        </c:when>
+        <c:when test="#{type eq 'separator'}">
+            <p:separator/>
+            <p:separator/>
+        </c:when>
+        <c:when test="#{type eq 'empty'}">
+            <p:column/>
+            <p:column/>
+        </c:when>
+        <c:otherwise>
+            <h:outputText value="type的类型错误，必须是text, password, boolean, select, muti-select, separator, empty中的一种！"/>
+            <p:column/>
+        </c:otherwise>            
+    </c:choose>
+</ui:composition>
