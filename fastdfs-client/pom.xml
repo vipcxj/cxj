@@ -3,10 +3,10 @@
     <parent>
         <groupId>io.github.vipcxj</groupId>
         <artifactId>cxj</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>fastdfs-client</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <name>fastdfs-client</name>
     <description>fastdfs-client is a FastDFS java client based on Netty 4.</description>
@@ -21,7 +21,7 @@
         <url>https://github.com/vipcxj/cxj</url>
         <connection>scm:git:git://github.com/vipcxj/cxj.git</connection>
         <developerConnection>scm:git:https://github.com/vipcxj/cxj.git</developerConnection>
-        <tag>v1.0</tag>
+        <tag>v1.0.14</tag>
     </scm>
     <developers>
         <developer>
