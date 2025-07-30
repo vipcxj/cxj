@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hibernate-utils</artifactId>
+    <name>cxj hibernate-utils</name>
     <url>https://github.com/vipcxj/cxj</url>
     <description>
         hibernate utils library for cxj.
@@ -102,6 +103,12 @@
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

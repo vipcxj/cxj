@@ -7,6 +7,7 @@
         <version>1.0</version>
     </parent>
     <artifactId>common</artifactId>
+    <name>cxj common</name>
     <packaging>jar</packaging>
 
     <url>https://github.com/vipcxj/cxj</url>
@@ -101,9 +102,9 @@
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
